@@ -24,18 +24,3 @@ Lab-time code assignments follow each class time. You can find these assignments
 Instructions for completing and submitting the assignments can be found in the README files of the appropriate subdirectories.
 
 Assignments are submitted using a professional-grade git-flow. If you haven't done so already, it's time to get comfortable with the core git commands. Don't worry, we'll give you step by step help as needed.
-
-## Index of Cheatsheets and Resources
-
-- [new project setup](https://codefellows.github.io/code-201-guide/curriculum/class-02/project-setup){:target="_blank"}
-- [css everything cheatsheet](https://overapi.com/css){:target="_blank"}
-- [collection of cheatsheets by overApi](https://overapi.com/){:target="_blank"}
-- [boolean practice](https://codefellows.github.io/code-201-guide/curriculum/class-03/facilitator/boolean-practice){:target="_blank"}
-- [javascript structure](https://codefellows.github.io/code-201-guide/curriculum/class-09/facilitator/javascript-practice){:target="_blank"}
-- [post 201 study guide](https://codefellows.github.io/code-201-guide/curriculum/class-15/facilitator/post-201-study-guide){:target="_blank"}
-- [git and github basics guide](https://codefellows.github.io/code-201-guide/curriculum/class-02/git-and-github-basics-guide){:target="_blank"}
-- [css2 cheat sheat](https://codefellows.github.io/code-201-guide/curriculum/cheat-sheets/css2-cheat-sheet){:target="_blank"}
-- [css3 cheat sheat](https://codefellows.github.io/code-201-guide/curriculum/cheat-sheets/css3-cheat-sheet){:target="_blank"}
-- [html5 reference tags](https://codefellows.github.io/code-201-guide/curriculum/cheat-sheets/htm-5-reference-tags){:target="_blank"}
-- [html5 sectioning flow chart](https://codefellows.github.io/code-201-guide/curriculum/cheat-sheets/html5-sectioning-flowchart){:target="_blank"}
-- [handling merge conflicts](https://codefellows.github.io/code-201-guide/curriculum/class-15/handling-merge-conflicts){:target="_blank"}
