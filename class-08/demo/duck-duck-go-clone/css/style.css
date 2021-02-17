@@ -111,8 +111,7 @@ ul {
   align-items: center;
   margin-right: 1rem;
   font-weight: bold;
-  font-size: small;
-  
+  font-size: small; 
 }
 .badge-check svg {
   margin-right: .5rem;
@@ -131,3 +130,9 @@ ul {
   font-size: small;
 }
 
+/* show lists vertically when screen is narrow */
+@media only screen and (max-width: 600px) {
+  ul {
+    display: block;
+  }
+}
