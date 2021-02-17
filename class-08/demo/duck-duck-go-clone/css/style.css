@@ -1,0 +1,133 @@
+/* 
+
+https://duckduckgo.com/
+
+https://wweb.dev/blog/4-websites-to-recreate-to-practice-your-web-development-skills
+
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements 
+
+https://cdnjs.com/libraries/meyer-reset
+
+https://heroicons.com/
+
+*/
+
+* {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #f7f7f7
+}
+
+header {
+  margin: 3.5rem;
+}
+
+
+.header-buttons {
+  float: right;
+}
+.menu, .social {
+  border: 0;
+  width: 32px;
+  color: rgba(73, 73, 73, 0.527);
+  padding: 5px;
+}
+
+/* pseudo class */
+.menu:hover {
+  background-color: rgb(102, 100, 100);
+  border-radius: 5px;
+}
+
+.social:hover {
+  color:rgba(24, 23, 23, 0.596);
+}
+
+button {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: x-large;
+  margin-top: 2rem;
+  font-weight:900;
+}
+
+form {
+  margin: 0 auto;
+  width: 40%;
+  position: relative;
+}
+
+input {
+  width: 100%;
+  text-align: left;
+  padding: .5rem;
+  background-color: white;
+  border-color: lightgray;
+  border-width: 1;
+  border-style: solid;
+  border-radius: 2px;
+}
+
+
+button[type=submit] {
+  width: 32px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  background-color: white;
+  border: 0;
+}
+
+/* pseudo element */
+input::placeholder {
+  color: rgba(128, 128, 128, 0.596);
+}
+
+.logo {
+  width: 160px;
+  height: 130px;
+  margin: 0 auto;
+  background-image: url(https://duckduckgo.com/assets/logo_homepage.normal.v108.svg);
+  background-size: 100% 100%;
+}
+
+p {
+  margin: 10px;
+  font-size: small;
+}
+
+ul {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.badge-check {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: small;
+  
+}
+.badge-check svg {
+  margin-right: .5rem;
+  width: 20px;
+  height: 20px;
+  color: #678fff;
+}
+
+.add-btn {
+  margin: 1rem;
+  background-color: #678fff;
+  border: 0;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: small;
+}
+
