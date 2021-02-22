@@ -1,177 +1,127 @@
 'use strict';
 
-/*
-  Practice domain modeling by planning out an app w that allows users to choose their favorite between two goats
-  Let students participate by suggesting the steps needed to make the app run
-  Continue until students have provided enough detail that they feel confident they could build the app themselves
-
-  App Flow:
-  - Welcome and instructions
-  - Randomly put 2 goats on the screen
-    - Random number generator
-    - a function to display goats
-  - A user clicks on a goat
-    - event listener needs to be on the image to fire the event handler
-    - the event handler fires
-      - ? check if total clicks is 25 ?
-        - stop letting the user click
-        - display the clicks
-      -? If not ?
-        - track which goat was clicked on
-        - update clicke images count of how many times it has been clicked on
-        - update both images'count of times shown
-        - Randomly Pick 2 goats, run the same code that put them on the screen to begin with
-
-  HTML
-    - have a left and right image container in the html
-    - Give them id's so we can select them
-    - let the user know what they are supposed to do
-      - instructions
-
-  More javascript details
-  We need Objects with all the image properties
-  const Image = function ()
-  {
-    name : 'cool goat',
-    clicks: 0,
-    times shown: 0,
-    url : 'cool-goat.jpg'
-  }
-
-  We need an Array to hold all image Objects
-
-  function to randomly pick an image{
-    Prevent last picked goats from being picked
-      - STRETCH pick all goats evenly as possible
-    Math.floor  Math.random() * array.length()
-    make sure left and right image are unique
-  }
-
-  click on an image, targetted by id
-  add event listener('click', function(){
-    keep track of the image that is clicked
-    prevent all currently displayed images from being re clicked {
-    }
-  })
-
-  function to display all the clicks at the end () {
-    generate a table or list
-    populate the data - adds to the inner html of an existing element (table or list)
-    divide object's times clicked by total shown
-  }
-
-*/
-
 // Globals
-const goatImageSectionTag = document.getElementById('all_goats');
-const leftGoatImageTag = document.getElementById('left_goat_img');
-const rightGoatImageTag = document.getElementById('right_goat_img');
+const goatImageSectionTag = document.getElementById('all-goats');
+const leftGoatImageTag = document.getElementById('left-goat-img');
+const rightGoatImageTag = document.getElementById('right-goat-img');
+const leftGoatHeaderTag = document.getElementById('left-goat-h2');
+const rightGoatHeaderTag = document.getElementById('right-goat-h2');
 
-
-
+const maxClicks = 5;
 let totalClicks = 0;
 
 // Variables to store the goats already on the page
 let leftGoatOnThePage = null;
 let rightGoatOnThePage = null;
 
-const GoatPicture = function (name, imageSrc) {
-  this.name = name;
+const Goat = function (title, imageSrc) {
+  this.title = title;
   this.clicks = 0;
   this.timesShown = 0;
   this.url = imageSrc;
 
-  // the allImages array is a property of the GoatPicture constructor
-  GoatPicture.allImages.push(this);
+  // the all array is a property of the Goat constructor
+  Goat.all.push(this);
 };
 
-GoatPicture.allImages = [];
+// initialize Constructor property
+Goat.all = [];
 
-/*
-Prevent last picked goats from being picked
-      - STRETCH pick all goats evenly as possible
-    Math.floor  Math.random() * array.length()
-    make sure left and right image are unique
-    */
 
-const renderNewGoats = function (leftIndex, rightIndex){
-  leftGoatImageTag.src = GoatPicture.allImages[leftIndex].url;
-  rightGoatImageTag.src = GoatPicture.allImages[rightIndex].url;
-};
 
-const pickNewGoats = function(){
-  const leftIndex = Math.floor(Math.random() * GoatPicture.allImages.length);
-  let rightIndex;
-  do {
-    rightIndex = Math.floor(Math.random() * GoatPicture.allImages.length);
-  } while (rightIndex === leftIndex);
-  console.log(GoatPicture.allImages[leftIndex].name, GoatPicture.allImages[rightIndex].name);
+/* fisher yates style shuffle
+https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
+*/
 
-  leftGoatOnThePage = GoatPicture.allImages[leftIndex];
-  rightGoatOnThePage = GoatPicture.allImages[rightIndex];
+function shuffle(array) {
+  for(let i = array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * i)
+    const temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+}
 
-  renderNewGoats(leftIndex, rightIndex);
+function pickNewGoats() {
+  shuffle(Goat.all);
+  leftGoatOnThePage = Goat.all[0];
+  rightGoatOnThePage = Goat.all[1];
+
+  renderNewGoats();
+}
+
+const renderNewGoats = function (){
+
+  leftGoatImageTag.src = leftGoatOnThePage.url;
+  rightGoatImageTag.src = rightGoatOnThePage.url;
+  leftGoatHeaderTag.textContent = leftGoatOnThePage.title;
+  rightGoatHeaderTag.textContent = rightGoatOnThePage.title;
 };
 
 const handleClickOnGoat = function(event){
-  console.log('im still alive');
+
   // if they can still click, do clicky things
-  if(totalClicks < 5){
+  if(totalClicks < maxClicks){
 
     const thingWeClickedOn = event.target;
     const id = thingWeClickedOn.id;
 
-    if(id === 'left_goat_img' || id === 'right_goat_img'){
-      //track the goats
-      // increment the goat image in the left_goat_image slot's clicks
-      // if goat is the left goat, increment the left goat)
-      if(id === 'left_goat_img'){
-        leftGoatOnThePage.clicks++;
+    //track the goat clicks and times shown
+    if(id === 'left-goat-img' || id === 'right-goat-img'){
+      
+      if(id === 'left-goat-img'){
+        leftGoatOnThePage.clicks += 1;
+      } else if(id === 'right-goat-img'){
+        rightGoatOnThePage.clicks += 1;
       }
 
-      if(id === 'right_goat_img'){
-        rightGoatOnThePage.clicks++;
-      }
+      leftGoatOnThePage.timesShown += 1;
+      rightGoatOnThePage.timesShown += 1;
 
-      leftGoatOnThePage.timesShown++;
-      rightGoatOnThePage.timesShown++;
-
-      //after we update the old, pick new pictures
+      //after we update the old, safe to pick new goats
       pickNewGoats();
     }
-    console.log(event.target.id);
   }
   // increment amount of clicks
-  totalClicks++;
-  //when they reach total max clicks, remove the clicky function
-  if(totalClicks === 5){
-    goatImageSectionTag.removeEventListener('click', handleClickOnGoat);
-    console.log('you picked 5 goats, thanks!');
+  totalClicks += 1;
 
-    //TODO: display the clicks to the page
+  //when they reach total max clicks, remove the clicky function
+  if(totalClicks === maxClicks){
+    goatImageSectionTag.removeEventListener('click', handleClickOnGoat);
+    // console.log('you picked 5 goats, thanks!');
+    alert('All this clicking has goat to stop');
+
+    //display the clicks to the page
+    renderLikes();
+
   }
+
+  
 };
 
-
-
-// leftGoatImageTag.addEventListener('click', handleClickOnGoat);
-// rightGoatImageTag.addEventListener('click', handleClickOnGoat);
+function renderLikes() {
+  const likesListElem = document.getElementById('goat-clicks');
+  likesListElem.innerHTML = '';
+  for (let i = 0; i < Goat.all.length; i++) {
+    const goatPicture = Goat.all[i];
+    const goatItemElem = document.createElement('li');
+    likesListElem.appendChild(goatItemElem);
+    goatItemElem.textContent = goatPicture.title + ' : ' + goatPicture.clicks;
+  }
+}
 
 goatImageSectionTag.addEventListener('click', handleClickOnGoat);
-// goatImageSectionTag.removeEventListener('click', handleClickOnGoat);
 
 
-// Instantiate my image objects
-
-new GoatPicture('Cruising Goat', './images/cruisin-goat.jpg');
-
-new GoatPicture('Float Your Goat', './images/float-your-goat.jpg');
-new GoatPicture('Kissing Goat', './images/kissing-goat.jpg');
-new GoatPicture('Sweater Goat', './images/sweater-goat.jpg');
-
-//Track the default goats;
-
-leftGoatOnThePage = GoatPicture.allImages[3];
-rightGoatOnThePage = GoatPicture.allImages[0];
+// Instantiate Goat objects
+new Goat('Cruising Goat', './images/cruisin-goat.jpg');
+new Goat('Float Your Goat', './images/float-your-goat.jpg');
+new Goat('Kissing Goat', './images/kissing-goat.jpg');
+new Goat('Sweater Goat', './images/sweater-goat.jpg');
+new Goat('Smiley', './images/smiling-goat.jpg');
+new Goat('Sassy', './images/sassy-goat.jpg');
+new Goat('Goat Out of Hand', './images/goat-out-of-hand.jpg');
 
 pickNewGoats();
+
+renderLikes();
