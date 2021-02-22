@@ -27,21 +27,6 @@ const Goat = function (title, imageSrc) {
 // initialize Constructor property
 Goat.all = [];
 
-
-
-/* fisher yates style shuffle
-https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
-*/
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * i)
-    const temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-  }
-}
-
 function pickNewGoats() {
   shuffle(Goat.all);
   leftGoatOnThePage = Goat.all[0];
@@ -113,6 +98,20 @@ function renderLikes() {
   }
 }
 
+/* fisher yates style shuffle
+https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
+*/
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * i)
+    const temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+}
+
+// Add Event Listeners
 goatImageSectionTag.addEventListener('click', handleClickOnGoat);
 
 
