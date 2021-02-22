@@ -34,7 +34,7 @@ https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-i
 */
 
 function shuffle(array) {
-  for(let i = array.length - 1; i > 0; i--){
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * i)
     const temp = array[i]
     array[i] = array[j]
@@ -50,28 +50,31 @@ function pickNewGoats() {
   renderNewGoats();
 }
 
-const renderNewGoats = function (){
+const renderNewGoats = function () {
 
   leftGoatImageTag.src = leftGoatOnThePage.url;
-  rightGoatImageTag.src = rightGoatOnThePage.url;
+  leftGoatImageTag.alt = leftGoatOnThePage.title;
   leftGoatHeaderTag.textContent = leftGoatOnThePage.title;
+
+  rightGoatImageTag.src = rightGoatOnThePage.url;
+  rightGoatImageTag.alt = rightGoatOnThePage.title;
   rightGoatHeaderTag.textContent = rightGoatOnThePage.title;
 };
 
-const handleClickOnGoat = function(event){
+const handleClickOnGoat = function (event) {
 
   // if they can still click, do clicky things
-  if(totalClicks < maxClicks){
+  if (totalClicks < maxClicks) {
 
     const thingWeClickedOn = event.target;
     const id = thingWeClickedOn.id;
 
     //track the goat clicks and times shown
-    if(id === 'left-goat-img' || id === 'right-goat-img'){
-      
-      if(id === 'left-goat-img'){
+    if (id === 'left-goat-img' || id === 'right-goat-img') {
+
+      if (id === 'left-goat-img') {
         leftGoatOnThePage.clicks += 1;
-      } else if(id === 'right-goat-img'){
+      } else if (id === 'right-goat-img') {
         rightGoatOnThePage.clicks += 1;
       }
 
@@ -86,7 +89,7 @@ const handleClickOnGoat = function(event){
   totalClicks += 1;
 
   //when they reach total max clicks, remove the clicky function
-  if(totalClicks === maxClicks){
+  if (totalClicks === maxClicks) {
     goatImageSectionTag.removeEventListener('click', handleClickOnGoat);
     // console.log('you picked 5 goats, thanks!');
     alert('All this clicking has goat to stop');
@@ -96,7 +99,7 @@ const handleClickOnGoat = function(event){
 
   }
 
-  
+
 };
 
 function renderLikes() {
